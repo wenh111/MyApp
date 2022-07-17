@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenh.myapp.mapper.UserMapper">
+
+
+    <insert id="insert">
+        insert into user(name, account, password, telephone_number)
+        values (#{name}, #{account}, #{password}, #{telephone_number})
+    </insert>
+
+    <select id="allUser" resultType="com.wenh.myapp.entity.User">
+        select *
+        from user;
+    </select>
+    <select id="UserLoginMessage" resultType="com.wenh.myapp.entity.User">
+        select *
+        from user
+        where account = #{account}
+          and password = #{password};
+    </select>
+
+    <select id="UserMessage" resultType="com.wenh.myapp.entity.User">
+        select distinct *
+        from user
+        where account = #{account}
+           or telephone_number = #{telephone_number}
+        order by id limit 0,1;
+    </select>
+
+    <select id="UserForgetPasswordMessage" resultType="com.wenh.myapp.entity.User">
+        select *
+        from user
+        where account = #{account}
+          and telephone_number = #{telephone_number};
+    </select>
+    <update id="UpdateUserPassword">
+        update user
+        set password = #{password}
+        where account = #{account};
+    </update>
+
+</mapper>

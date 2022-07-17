@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenh.myapp.mapper.SaveMoneyEventMapper">
+    <insert id="insertSaveMoneyEvent">
+        insert into savemoney(account, type, title, date, amount, deadlineDate, customType, targetMoney, savedMoney,
+                              RemainingTimes)
+        values (#{account}, #{type}, #{title}, #{date}, #{amount}, #{deadlineDate}, #{customType}, #{targetMoney},
+                #{savedMoney},
+                #{RemainingTimes})
+    </insert>
+
+    <select id="selectAllSaveMoneyEvent" resultType="com.wenh.myapp.entity.SaveMoneyEventBean">
+        select *
+        from savemoney;
+    </select>
+
+    <select id="selectAllSaveMoneyPlanEvent" resultType="com.wenh.myapp.entity.SaveMoneyEventBean">
+        select * from savemoney
+        <where>
+            account = #{account}
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+    <delete id="deleteSaveMoneyPlanEven">
+        delete
+        from savemoney
+        where id = #{id};
+    </delete>
+
+    <update id="updateSaveMoneyPlanEven">
+        update savemoney
+        <set>
+            <if test="date != null and date != ''">date = #{date}</if>
+
+            <if test="savedMoney != -1">, savedMoney = #{savedMoney}</if>
+
+            <if test="remainingTimes != -1">, remainingTimes = #{remainingTimes}</if>
+        </set>
+        <where>id = #{id}</where>
+    </update>
+
+</mapper>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenh.myapp.mapper.AllPayMapper">
+    <insert id="InsertPayEvent">
+        insert into allpay(int_date, year, month, time, date, payTime, category, cost, remark, location, account)
+        values (#{int_date}, #{year}, #{month}, #{time}, #{date}, #{payTime}, #{category}, #{cost}, #{remark},
+                #{location}, #{account})
+    </insert>
+    <select id="SelectPayEvent" resultType="com.wenh.myapp.entity.AllPay">
+        select * from allpay
+        <where>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="category != null and category != ''">
+                and category = #{category}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+        </where>
+        order by int_date desc;
+    </select>
+    <select id="SelectDetailsPayEvent" resultType="com.wenh.myapp.entity.AllPay">
+        select *
+        from allpay
+        where id = #{id}
+    </select>
+    <delete id="DeletePayEvent">
+        delete
+        from allpay
+        where id = #{id};
+    </delete>
+
+    <update id="UpdatePayEvent">
+
+        UPDATE allpay
+        <set>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="month != null and month != ''">
+                ,month = #{month}
+            </if>
+            <if test="date != null and date != ''">
+                ,date = #{date}
+            </if>
+            <if test="category != null and category != ''">
+                ,category = #{category}
+            </if>
+            <if test="payTime != null and payTime != ''">
+                ,payTime = #{payTime}
+            </if>
+            <if test="cost != null and cost != 0">
+                ,cost = #{cost}
+            </if>
+            <if test="remark != null and remark != ''">
+                ,remark = #{remark}
+            </if>
+            <if test="time != null and time != ''">
+                ,time = #{time}
+            </if>
+            <if test="int_date != null and int_date != 0 ">
+                ,int_date = #{int_date}
+            </if>
+        </set>
+        <where>
+            id = #{id}
+        </where>
+    </update>
+
+    <select id="SelectPayEventDay" resultType="com.wenh.myapp.entity.AllPay">
+        select * from allpay
+        <where>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            <if test="date != null and date != ''">
+                and date = #{date}
+            </if>
+            <if test="account != null and account != ''">
+                and account = #{account}
+            </if>
+            <if test="isCost == -1 ">
+                and cost &lt; 0
+            </if>
+            <if test="isCost == 1 ">
+                and cost &gt; 0
+            </if>
+        </where>
+    </select>
+
+    <select id="SelectAllPayEvent" resultType="com.wenh.myapp.entity.AllPay">
+        select * from  allpay;
+    </select>
+</mapper>
