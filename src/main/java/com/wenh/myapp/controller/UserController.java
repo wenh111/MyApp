@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private UserMapper userMapper;
-    @Autowired
     private UserService userService;
 
     @GetMapping
