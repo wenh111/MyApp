@@ -28,7 +28,7 @@ public class FileUploadAndDownLoadService {
     @Autowired
     private UserPhotoMapper userPhotoMapper;
 
-    public String photo(MultipartFile file) throws IOException {
+    public String photo(MultipartFile file, String account) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String type = FileUtil.extName(originalFilename);
         long size = file.getSize();
@@ -69,7 +69,14 @@ public class FileUploadAndDownLoadService {
         userPhotoBean.setSize(size/1024);
         userPhotoBean.setUrl(url);
         userPhotoBean.setMd5(md5);
-        userPhotoMapper.insertPhoto(userPhotoBean);
+        userPhotoBean.setAccount(account);
+        List<UserPhotoBean> userPhotoBeans = userPhotoMapper.selectUserPhoto(account);
+        if(userPhotoBeans.size() != 0 && userPhotoBeans != null){
+            userPhotoMapper.updatePhoto(userPhotoBean);
+        }else{
+            userPhotoMapper.insertPhoto(userPhotoBean);
+        }
+        //userPhotoMapper.insertPhoto(userPhotoBean);
         return url;
     }
 

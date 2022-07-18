@@ -17,14 +17,16 @@ public class FileUploadAndDownLoadController {
 
 
     @PostMapping("/uploadPhoto")
-    private String uploadPhoto(@RequestParam MultipartFile file) throws IOException {
-        String url = fileUploadAndDownLoadService.photo(file);
+    private String uploadPhoto(@RequestParam MultipartFile file,@RequestParam String account) throws IOException {
+        String url = fileUploadAndDownLoadService.photo(file,account);
         return url;
     }
     @GetMapping("/{fileUUID}")
     public void downloadPhoto(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {
 
         fileUploadAndDownLoadService.downloadPhoto(fileUUID,response);
+
     }
+
 
 }

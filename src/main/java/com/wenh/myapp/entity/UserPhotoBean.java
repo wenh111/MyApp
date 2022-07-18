@@ -10,5 +10,5 @@ public class UserPhotoBean {
     private Long size;
     private String url;
     private String md5;
-
+    private String account;
 }

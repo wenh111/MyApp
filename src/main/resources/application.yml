@@ -18,4 +18,5 @@ files:
     path: /home/files/
 
 String:
+  #urls: http://localhost:9090/photo/
   urls: http://114.132.54.246:9090/photo/

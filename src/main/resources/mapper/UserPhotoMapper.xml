@@ -4,13 +4,32 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wenh.myapp.mapper.UserPhotoMapper">
 
-    <insert id="insertPhoto" >
-        insert into userphoto(name, type, size, url,md5)
-        values (#{name}, #{type}, #{size}, #{url},#{md5})
+    <insert id="insertPhoto">
+        insert into userphoto(name, type, size, url, md5, account)
+        values (#{name}, #{type}, #{size}, #{url}, #{md5}, #{account})
     </insert>
+
     <select id="selectPhoto" resultType="com.wenh.myapp.entity.UserPhotoBean">
-        select * from userphoto where md5 = #{md5}
+        select *
+        from userphoto
+        where md5 = #{md5}
     </select>
+
+    <select id="selectUserPhoto" resultType="com.wenh.myapp.entity.UserPhotoBean">
+        select *
+        from userphoto
+        where account = #{account}
+    </select>
+
+    <update id="updatePhoto">
+        update userphoto
+        set name = #{name},
+            type = #{type},
+            size = #{size},
+            url  = #{url},
+            md5  = #{md5}
+        where account = #{account}
+    </update>
 
 
 </mapper>
