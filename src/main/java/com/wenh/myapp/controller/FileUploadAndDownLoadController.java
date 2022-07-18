@@ -1,6 +1,7 @@
 package com.wenh.myapp.controller;
 
 
+import com.wenh.myapp.entity.UploadSuccessfulMessage;
 import com.wenh.myapp.service.FileUploadAndDownLoadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,9 +18,9 @@ public class FileUploadAndDownLoadController {
 
 
     @PostMapping("/uploadPhoto")
-    private String uploadPhoto(@RequestParam MultipartFile file,@RequestParam String account) throws IOException {
-        String url = fileUploadAndDownLoadService.photo(file,account);
-        return url;
+    private UploadSuccessfulMessage uploadPhoto(@RequestParam MultipartFile file, @RequestParam String account) throws IOException {
+
+        return fileUploadAndDownLoadService.photo(file,account);
     }
     @GetMapping("/{fileUUID}")
     public void downloadPhoto(@PathVariable String fileUUID, HttpServletResponse response) throws IOException {

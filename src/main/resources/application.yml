@@ -8,9 +8,15 @@ spring:
     #url: jdbc:mysql://114.132.54.246:3306/keepmoney?serverTimezone=GMT%2b8
     username: root
     password: 123456
+    #设置tomcat文件上传大小限制
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1000MB
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
+
 
 files:
   upload:

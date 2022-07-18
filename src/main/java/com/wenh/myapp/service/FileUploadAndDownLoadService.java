@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
+import com.wenh.myapp.entity.UploadSuccessfulMessage;
 import com.wenh.myapp.entity.UserPhotoBean;
 import com.wenh.myapp.mapper.UserPhotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class FileUploadAndDownLoadService {
     @Autowired
     private UserPhotoMapper userPhotoMapper;
 
-    public String photo(MultipartFile file, String account) throws IOException {
+    public UploadSuccessfulMessage photo(MultipartFile file, String account) throws IOException {
         String originalFilename = file.getOriginalFilename();
         String type = FileUtil.extName(originalFilename);
         long size = file.getSize();
@@ -77,7 +78,8 @@ public class FileUploadAndDownLoadService {
             userPhotoMapper.insertPhoto(userPhotoBean);
         }
         //userPhotoMapper.insertPhoto(userPhotoBean);
-        return url;
+        UploadSuccessfulMessage uploadSuccessfulMessage = new UploadSuccessfulMessage(account,type,url);
+        return uploadSuccessfulMessage;
     }
 
     private UserPhotoBean getFileByMd5(String md5) {
