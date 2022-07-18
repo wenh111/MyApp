@@ -12,3 +12,10 @@ spring:
 mybatis:
   mapper-locations: classpath:mapper/*.xml
 
+files:
+  upload:
+    #path: D:/图片/SpringBoot/files/
+    path: /home/files/
+
+String:
+  urls: http://114.132.54.246:9090/photo/

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenh.myapp.mapper.UserPhotoMapper">
+
+    <insert id="insertPhoto" >
+        insert into userphoto(name, type, size, url,md5)
+        values (#{name}, #{type}, #{size}, #{url},#{md5})
+    </insert>
+    <select id="selectPhoto" resultType="com.wenh.myapp.entity.UserPhotoBean">
+        select * from userphoto where md5 = #{md5}
+    </select>
+
+
+</mapper>
