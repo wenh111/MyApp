@@ -16,4 +16,6 @@ public interface UserPhotoMapper {
     List<UserPhotoBean> selectUserPhoto(@Param("account")String account);
 
     int updatePhoto(UserPhotoBean userPhotoBean);
+
+    List<UserPhotoBean> getAccountPhotoName(@Param("account")String account);
 }

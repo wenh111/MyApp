@@ -31,5 +31,9 @@
         where account = #{account}
     </update>
 
-
+    <select id="getAccountPhotoName" resultType="com.wenh.myapp.entity.UserPhotoBean">
+        select *
+        from userphoto
+        where account = #{account};
+    </select>
 </mapper>

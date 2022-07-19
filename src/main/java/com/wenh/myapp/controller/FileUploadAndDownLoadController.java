@@ -28,6 +28,12 @@ public class FileUploadAndDownLoadController {
         fileUploadAndDownLoadService.downloadPhoto(fileUUID,response);
 
     }
+    @GetMapping("/getPhoto")
+    public void getPhoto(@RequestParam String account, HttpServletResponse response) throws IOException {
+        String fileUUID = fileUploadAndDownLoadService.getAccountFileUUID(account);
+        System.out.println("fileUUID ===================>" + fileUUID );
+        fileUploadAndDownLoadService.downloadPhoto(fileUUID,response);
+    }
 
 
 }
