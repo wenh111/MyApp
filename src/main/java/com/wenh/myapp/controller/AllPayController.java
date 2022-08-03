@@ -2,6 +2,7 @@ package com.wenh.myapp.controller;
 
 
 import com.wenh.myapp.entity.AllPay;
+import com.wenh.myapp.entity.MonthPayEventDataBean;
 import com.wenh.myapp.entity.PayEventDataBean;
 import com.wenh.myapp.entity.PayOrIncomeEventDataBean;
 import com.wenh.myapp.service.AllPayService;
@@ -56,4 +57,9 @@ public class AllPayController {
                                                        @RequestParam String month, @RequestParam String year) {
         return allPayService.SelectPayEventDay(account,date,month,year);
     }
+    @GetMapping("/monthPayEvent")
+    private MonthPayEventDataBean getMonthPayEvent(@RequestParam String account,@RequestParam String year,@RequestParam String month, @RequestParam int since , @RequestParam int perPages){
+        return allPayService.getMonthPayEvent(account,year,month,since,perPages);
+    }
+
 }
