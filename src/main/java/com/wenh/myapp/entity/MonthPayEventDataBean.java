@@ -9,6 +9,15 @@ public class MonthPayEventDataBean {
     int since;
     int perPage;
 
+    public MonthPayEventDataBean(List<AllPay> allPayList, int count, int since, int perPage) {
+        this.allPayList = allPayList;
+        this.count = count;
+        this.since = since;
+        this.perPage = perPage;
+    }
+
+    public MonthPayEventDataBean() {
+    }
 
     public int getCount() {
         return count;
