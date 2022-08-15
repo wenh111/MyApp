@@ -102,26 +102,68 @@
     </select>
 
     <select id="SelectAllPayEvent" resultType="com.wenh.myapp.entity.AllPay">
-        select * from  allpay;
+        select *
+        from allpay;
     </select>
 
     <select id="getMonthSinceValues" resultType="com.wenh.myapp.entity.AllPay">
-        select * from allpay where account = #{account} and year = #{year} and month = #{month} order by int_date desc limit #{lastValues},1;
+        select *
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and account = #{account} and year = #{year} and month = #{month}
+        </where>
+        order by int_date desc limit #{lastValues}, 1;
     </select>
     <select id="getDatePayEventCount" resultType="integer">
-        select count(*) from allpay where date = #{date} and account = #{account};
+        select count(*)
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and date = #{date} and account = #{account}
+        </where>
     </select>
     <!--<select id="getLastValuesID" resultType="integer">
         select id from absolute month = #{month} order by int_date desc limit #{i},1;
     </select>-->
     <select id="SelectPayEventMonth" resultType="com.wenh.myapp.entity.AllPay">
-        select * from allpay where account = #{account} and date = #{date} order by int_date desc;
+        select *
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and account = #{account}
+            and date = #{date}
+
+        </where>
+        order by int_date desc;
     </select>
     <select id="SelectPayEventDate" resultType="com.wenh.myapp.entity.AllPay">
-        select * from allpay where account = #{account} and year = #{year} and month = #{month} and
-                                   int_date &lt; #{since} order by int_date desc limit #{perPages};
+        select *
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and account = #{account} and year = #{year} and month = #{month} and int_date &lt; #{since}
+
+        </where>
+        order by int_date desc limit #{perPages};
     </select>
     <select id="getMonthNextSinceValues" resultType="com.wenh.myapp.entity.AllPay">
-        select * from allpay where account = #{account} and int_date &lt; #{since} order by int_date desc limit #{lastValues},1;
+        select *
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and account = #{account} and int_date &lt; #{since}
+        </where>
+        order by int_date desc limit #{lastValues}, 1;
     </select>
 </mapper>

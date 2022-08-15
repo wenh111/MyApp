@@ -58,8 +58,8 @@ public class AllPayController {
         return allPayService.SelectPayEventDay(account,date,month,year);
     }
     @GetMapping("/monthPayEvent")
-    private MonthPayEventDataBean getMonthPayEvent(@RequestParam String account,@RequestParam String year,@RequestParam String month, @RequestParam int since , @RequestParam int perPages){
-        return allPayService.getMonthPayEvent(account,year,month,since,perPages);
+    private MonthPayEventDataBean getMonthPayEvent(@RequestParam String account,@RequestParam String year,@RequestParam String month, @RequestParam int since , @RequestParam int perPages,@RequestParam String category){
+        return allPayService.getMonthPayEvent(account,year,month,since,perPages,category);
     }
 
 }
