@@ -113,7 +113,10 @@
             <if test="category != null and category != ''">
                 category = #{category}
             </if>
-            and account = #{account} and year = #{year} and month = #{month}
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            and account = #{account} and year = #{year}
         </where>
         order by int_date desc limit #{lastValues}, 1;
     </select>
@@ -150,7 +153,10 @@
             <if test="category != null and category != ''">
                 category = #{category}
             </if>
-            and account = #{account} and year = #{year} and month = #{month} and int_date &lt; #{since}
+            <if test="month != null and month != ''">
+                and month = #{month}
+            </if>
+            and account = #{account} and year = #{year} and int_date &lt; #{since}
 
         </where>
         order by int_date desc limit #{perPages};

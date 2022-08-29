@@ -9,10 +9,12 @@ import com.wenh.myapp.service.AllPayService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 @RestController
 @RequestMapping("/AllPay")
 public class AllPayController {
-    @Autowired
+    @Resource
     AllPayService allPayService;
 
     @GetMapping("/AllPayEvent")
@@ -58,8 +60,9 @@ public class AllPayController {
         return allPayService.SelectPayEventDay(account,date,month,year);
     }
     @GetMapping("/monthPayEvent")
-    private MonthPayEventDataBean getMonthPayEvent(@RequestParam String account,@RequestParam String year,@RequestParam String month, @RequestParam int since , @RequestParam int perPages,@RequestParam String category){
-        return allPayService.getMonthPayEvent(account,year,month,since,perPages,category);
+    private MonthPayEventDataBean getMonthPayEvent(@RequestParam String account,@RequestParam String year,@RequestParam String month, @RequestParam int since ,
+                                                   @RequestParam int perPages,@RequestParam String category,@RequestParam int selectType){
+        return allPayService.getMonthPayEvent(account,year,month,since,perPages,category,selectType);
     }
 
 }

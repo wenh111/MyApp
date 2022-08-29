@@ -1,20 +1,18 @@
 package com.wenh.myapp.controller;
 
 
-import com.wenh.myapp.entity.UserDataBeen;
 import com.wenh.myapp.entity.User;
-import com.wenh.myapp.mapper.UserMapper;
+import com.wenh.myapp.entity.UserDataBeen;
 import com.wenh.myapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
+    @Resource
     private UserService userService;
 
     @GetMapping

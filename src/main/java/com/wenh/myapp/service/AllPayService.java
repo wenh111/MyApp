@@ -62,7 +62,7 @@ public class AllPayService {
 
     }
 
-    public MonthPayEventDataBean getMonthPayEvent(String account, String year, String month, int since, int perPages, String category) {
+    public MonthPayEventDataBean getMonthPayEvent(String account, String year, String month, int since, int perPages, String category, int selectType) {
         String date;
         System.out.println("account ====== " + account);
         /*System.out.println("category ====== " + category);
@@ -71,7 +71,7 @@ public class AllPayService {
         MonthPayEventDataBean monthPayEventDataBean = new MonthPayEventDataBean();
 
         if (since == -1 && perPages == -1) {
-            //获取该月的首条记录
+            //获取的首条记录
             AllPay allPay = allPayMapper.getMonthSinceValues(year, month, account, 0,category);
             if(allPay == null){
                 System.out.println("account ======= " + account);
@@ -91,14 +91,24 @@ public class AllPayService {
                 monthPayEventDataBean.setCount(allPayList.size());
                 //获取下一天的数据
                 AllPay nextDateList = allPayMapper.getMonthSinceValues(year, month, account, count,category);
-                if(nextDateList == null || !nextDateList.getMonth().equals(month)){
-                    monthPayEventDataBean.setPerPage(0);
+                if(selectType == 0){
+                    if(nextDateList == null || !nextDateList.getMonth().equals(month)){
+                        monthPayEventDataBean.setPerPage(0);
+                    }else{
+                        String nextDate = nextDateList.getDate();
+                        int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
+                        //下一天的数据数量
+                        monthPayEventDataBean.setPerPage(nextDateCount);
+                    }
                 }else{
-                    String nextDate = nextDateList.getDate();
-                    int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
-                    //下一天的数据数量
-                    monthPayEventDataBean.setPerPage(nextDateCount);
-
+                    if(nextDateList == null || !nextDateList.getYear().equals(year)){
+                        monthPayEventDataBean.setPerPage(0);
+                    }else{
+                        String nextDate = nextDateList.getDate();
+                        int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
+                        //下一天的数据数量
+                        monthPayEventDataBean.setPerPage(nextDateCount);
+                    }
                 }
             }
 
@@ -123,15 +133,28 @@ public class AllPayService {
             System.out.println("============ ");
             System.out.println("since ====== " + since);
             AllPay nextDateList = allPayMapper.getMonthNextSinceValues(account, allPayList.get(0).getInt_date(), 0,category);
-            if(nextDateList == null || !nextDateList.getMonth().equals(month)){
-                monthPayEventDataBean.setPerPage(0);
+            if(selectType == 0 ){
+                if(nextDateList == null || !nextDateList.getMonth().equals(month)){
+                    monthPayEventDataBean.setPerPage(0);
+                }else{
+                    String nextDate = nextDateList.getDate();
+                    System.out.println("nextDate ====== " + nextDate);
+                    int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
+                    System.out.println("nextDateCount ====== " + nextDateCount);
+                    monthPayEventDataBean.setPerPage(nextDateCount);
+                }
             }else{
-                String nextDate = nextDateList.getDate();
-                System.out.println("nextDate ====== " + nextDate);
-                int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
-                System.out.println("nextDateCount ====== " + nextDateCount);
-                monthPayEventDataBean.setPerPage(nextDateCount);
+                if(nextDateList == null || !nextDateList.getYear().equals(year)){
+                    monthPayEventDataBean.setPerPage(0);
+                }else{
+                    String nextDate = nextDateList.getDate();
+                    System.out.println("nextDate ====== " + nextDate);
+                    int nextDateCount = allPayMapper.getDatePayEventCount(account, nextDate,category);
+                    System.out.println("nextDateCount ====== " + nextDateCount);
+                    monthPayEventDataBean.setPerPage(nextDateCount);
+                }
             }
+
 
         }
 
