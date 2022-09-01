@@ -109,4 +109,9 @@ public class FileUploadAndDownLoadService {
         System.out.println("getAccountFileUUID ==============>" + fileUUID);
         return fileUUID;
     }
+    public UserPhotoBean getAccountPhotoUrl(String account) {
+        List<UserPhotoBean> accountPhotoName = userPhotoMapper.getAccountPhotoName(account);
+        UserPhotoBean userPhotoBean = accountPhotoName.get(0);
+        return userPhotoBean;
+    }
 }

@@ -2,18 +2,20 @@ package com.wenh.myapp.controller;
 
 
 import com.wenh.myapp.entity.UploadSuccessfulMessage;
+import com.wenh.myapp.entity.UserPhotoBean;
 import com.wenh.myapp.service.FileUploadAndDownLoadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RestController
 @RequestMapping("/photo")
 public class FileUploadAndDownLoadController {
-    @Autowired
+    @Resource
     private FileUploadAndDownLoadService fileUploadAndDownLoadService;
 
 
@@ -33,6 +35,10 @@ public class FileUploadAndDownLoadController {
         String fileUUID = fileUploadAndDownLoadService.getAccountFileUUID(account);
         System.out.println("fileUUID ===================>" + fileUUID );
         fileUploadAndDownLoadService.downloadPhoto(fileUUID,response);
+    }
+    @GetMapping("/getUserPhotoUrl")
+    public UserPhotoBean getUserPhotoUrl(@RequestParam String account){
+         return  fileUploadAndDownLoadService.getAccountPhotoUrl(account);
     }
 
 
