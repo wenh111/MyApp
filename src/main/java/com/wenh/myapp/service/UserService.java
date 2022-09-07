@@ -48,4 +48,7 @@ public class UserService {
         return userMapper.insert(user);
     }
 
+    public int update(int id,String name) {
+        return userMapper.update(id,name);
+    }
 }

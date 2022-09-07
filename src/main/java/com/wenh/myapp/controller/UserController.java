@@ -46,5 +46,10 @@ public class UserController {
     }
 
 
+    @PostMapping("/userMessageUpdate")
+    public int MessageUpdate(@RequestParam int id,@RequestParam String name) {
+        return userService.update(id,name);
+    }
+
 
 }

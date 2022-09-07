@@ -41,4 +41,10 @@
         where account = #{account};
     </update>
 
+    <update id="update">
+        update user
+        <set>name = #{name}</set>
+        where id = #{id};
+    </update>
+
 </mapper>
