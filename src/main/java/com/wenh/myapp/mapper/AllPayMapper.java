@@ -36,5 +36,7 @@ public interface AllPayMapper {
 
     AllPay getMonthNextSinceValues(@Param("account")String account, int since, int lastValues,@Param("category") String category);
 
+    List<AllPay> getDayPayEvent(@Param("account") String account,@Param("date") String date,@Param("category") String category);
+
     //int getLastValuesID(@Param("month")String month, int i);
 }

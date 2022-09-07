@@ -172,4 +172,15 @@
         </where>
         order by int_date desc limit #{lastValues}, 1;
     </select>
+    <select id="getDayPayEvent" resultType="com.wenh.myapp.entity.AllPay">
+        select *
+        from allpay
+        <where>
+            <if test="category != null and category != ''">
+                category = #{category}
+            </if>
+            and account = #{account} and date = #{date}
+        </where>
+        order by int_date ;
+    </select>
 </mapper>
