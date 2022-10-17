@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wenh.myapp.mapper.OCRInsertMapper">
+    <insert id="wechatInsertSql" parameterType="com.wenh.myapp.entity.AllPay">
+        insert into allpay(int_date, year, month, time, date, payTime, category, cost, remark, location, account)
+        values
+        <foreach collection="allPayList" item="payEvent" separator=",">
+            (#{payEvent.int_date}, #{payEvent.year}, #{payEvent.month}, #{payEvent.time}, #{payEvent.date},
+            #{payEvent.payTime}, #{payEvent.category},
+            #{payEvent.cost}, #{payEvent.remark},#{payEvent.location}, #{payEvent.account})
+        </foreach>
+
+    </insert>
+</mapper>

@@ -4,8 +4,8 @@ server:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/keepmoney?serverTimezone=GMT%2b8
-    #url: jdbc:mysql://114.132.54.246:3306/keepmoney?serverTimezone=GMT%2b8
+    #url: jdbc:mysql://localhost:3306/keepmoney?serverTimezone=GMT%2b8
+    url: jdbc:mysql://114.132.54.246:3306/keepmoney?serverTimezone=GMT%2b8
     username: root
     password: 123456
     #设置tomcat文件上传大小限制
